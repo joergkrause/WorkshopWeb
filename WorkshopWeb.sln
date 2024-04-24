@@ -5,13 +5,21 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendApi", "BackendApi\BackendApi.csproj", "{36893167-F65B-43C6-B5B4-AFA463351BE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{190422F4-AFC4-4A2E-ABBB-B2D1D804FEC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{190422F4-AFC4-4A2E-ABBB-B2D1D804FEC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{90AF1F40-1CF5-4082-A523-B9049A94BBE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{90AF1F40-1CF5-4082-A523-B9049A94BBE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModels", "DomainModels\DomainModels.csproj", "{7C291DC8-7EC9-4081-A180-023C43D6C214}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModels", "DomainModels\DomainModels.csproj", "{7C291DC8-7EC9-4081-A180-023C43D6C214}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTransferObjects", "DataTransferObjects\DataTransferObjects.csproj", "{32176AE1-DA96-4ED0-B7A4-2ABBA871F398}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTransferObjects", "DataTransferObjects\DataTransferObjects.csproj", "{32176AE1-DA96-4ED0-B7A4-2ABBA871F398}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{7A65A3FC-E002-477A-9A91-421CD32E4019}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebFrontend", "WebFrontend", "{5EC19416-DB01-4E55-B962-03456CA96D64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiConsoleClient", "WebApiConsoleClient\WebApiConsoleClient.csproj", "{8E57BEC2-5CB5-4A87-83AC-4142031323C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationRazorPages", "WebApplicationRazorPages\WebApplicationRazorPages.csproj", "{9DB44FC0-4FE7-431D-909E-6914755B3E9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +47,26 @@ Global
 		{32176AE1-DA96-4ED0-B7A4-2ABBA871F398}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32176AE1-DA96-4ED0-B7A4-2ABBA871F398}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32176AE1-DA96-4ED0-B7A4-2ABBA871F398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E57BEC2-5CB5-4A87-83AC-4142031323C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E57BEC2-5CB5-4A87-83AC-4142031323C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E57BEC2-5CB5-4A87-83AC-4142031323C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E57BEC2-5CB5-4A87-83AC-4142031323C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB44FC0-4FE7-431D-909E-6914755B3E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB44FC0-4FE7-431D-909E-6914755B3E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB44FC0-4FE7-431D-909E-6914755B3E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB44FC0-4FE7-431D-909E-6914755B3E9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{36893167-F65B-43C6-B5B4-AFA463351BE9} = {7A65A3FC-E002-477A-9A91-421CD32E4019}
+		{190422F4-AFC4-4A2E-ABBB-B2D1D804FEC8} = {7A65A3FC-E002-477A-9A91-421CD32E4019}
+		{90AF1F40-1CF5-4082-A523-B9049A94BBE5} = {7A65A3FC-E002-477A-9A91-421CD32E4019}
+		{7C291DC8-7EC9-4081-A180-023C43D6C214} = {7A65A3FC-E002-477A-9A91-421CD32E4019}
+		{32176AE1-DA96-4ED0-B7A4-2ABBA871F398} = {7A65A3FC-E002-477A-9A91-421CD32E4019}
+		{8E57BEC2-5CB5-4A87-83AC-4142031323C4} = {5EC19416-DB01-4E55-B962-03456CA96D64}
+		{9DB44FC0-4FE7-431D-909E-6914755B3E9B} = {5EC19416-DB01-4E55-B962-03456CA96D64}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28BECFB2-75AF-4BA7-B2D4-9034C998E307}
