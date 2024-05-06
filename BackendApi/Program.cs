@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 var cs = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DocumentContext>(options =>
    options.UseSqlServer(cs));
-builder.Services.AddScoped<DeviceManager>();
+builder.Services.AddScoped<DocumentManager>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

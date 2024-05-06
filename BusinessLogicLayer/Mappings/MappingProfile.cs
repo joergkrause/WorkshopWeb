@@ -8,6 +8,7 @@ namespace BusinessLogicLayer.Mappings
   {
     public MappingProfile()
     {
+
       CreateMap<Document, DocumentDto>()
         .ForMember(e => e.HasContent, opt => opt.MapFrom(e => e.Content != null))
         .ReverseMap();

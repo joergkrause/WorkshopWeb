@@ -9,4 +9,6 @@ public abstract class Manager(IServiceProvider serviceProvider)
   protected DocumentContext Context => serviceProvider.GetRequiredService<DocumentContext>();
 
   protected IMapper Mapper => serviceProvider.GetRequiredService<IMapper>();
+
+
 }

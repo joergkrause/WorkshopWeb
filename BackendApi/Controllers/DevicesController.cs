@@ -11,7 +11,7 @@ namespace BackendApi.Controllers
   [ApiController]
   [Produces("application/json")]
   [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-  public class DevicesController(DeviceManager deviceManager) : ControllerBase
+  public class DevicesController(DocumentManager deviceManager) : ControllerBase
   {
 
     [HttpGet("{id:int}", Name = "GetById")]
