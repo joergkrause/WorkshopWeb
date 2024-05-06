@@ -12,7 +12,7 @@ public class Document : EntityBase, ISoftDelete
 
   public string? Description { get; set; }
 
-  public ICollection<Category> Categories { get; set; } = [];
+  public Category Category { get; set; }
 
   public ICollection<Content> Content { get; set; } = [];
 }
