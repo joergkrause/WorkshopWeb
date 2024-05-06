@@ -38,7 +38,7 @@ public class DocumentManager(IServiceProvider serviceProvider) : Manager(service
   }
 
   // TODO: Use Dto for return type
-  public async Task<DataResult<DocumentDto>> AddOrUpdateDeviceAsync(DocumentDto deviceDto)
+  public async Task<DataResult<DocumentDto>> AddOrUpdateDocumentAsync(DocumentDto deviceDto)
   {
     var model = Mapper.Map<Document>(deviceDto);
     Context.Entry(model).State = model.Id == default ? EntityState.Added : EntityState.Modified;

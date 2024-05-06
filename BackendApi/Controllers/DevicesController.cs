@@ -11,15 +11,15 @@ namespace BackendApi.Controllers
   [ApiController]
   [Produces("application/json")]
   [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-  public class DevicesController(DocumentManager deviceManager) : ControllerBase
+  public class DevicesController(DocumentManager documentManager) : ControllerBase
   {
 
     [HttpGet("{id:int}", Name = "GetById")]
     [ProducesResponseType(typeof(DocumentDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetDeviceById([FromRoute] int id)
+    public async Task<IActionResult> GetDocumentById([FromRoute] int id)
     {
-      var device = await deviceManager.GetDeviceById(id);
+      var device = await documentManager.GetDocumentById(id);
       if (device == null)
       {
         return NotFound();
@@ -29,31 +29,31 @@ namespace BackendApi.Controllers
 
     [HttpGet(Name = "GetAll")]
     [ProducesResponseType(typeof(IEnumerable<DocumentListDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetDevices()
+    public async Task<IActionResult> GetDocuments()
     {
-      var devices = await deviceManager.GetDevicesAsync();
+      var devices = await documentManager.GetDocumentsAsync();
       return Ok(devices);
     }
 
     [HttpGet("name", Name = "Search")]
     [ProducesResponseType(typeof(IEnumerable<DocumentListDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetDevicesByName([FromQuery] string name, [FromQuery] bool sort)
+    public async Task<IActionResult> GetDocumentsByName([FromQuery] string name, [FromQuery] bool sort)
     {
-      var devices = await deviceManager.GetDevicesByNameAsync(name, sort);
+      var devices = await documentManager.GetDocumentsByNameAsync(name, sort);
       return Ok(devices);
     }
 
     [HttpPost(Name = "Add")]
     [ProducesResponseType(typeof(void), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> AddDevice([FromBody] DocumentDto deviceDto)
+    public async Task<IActionResult> AddDocument([FromBody] DocumentDto deviceDto)
     {
       //if (!ModelState.IsValid)
       //{
         
       //}
 
-      var result = await deviceManager.AddOrUpdateDeviceAsync(deviceDto);
+      var result = await documentManager.AddOrUpdateDocumentAsync(deviceDto);
       if (!result.Success)
       {
         return result.Exception switch
@@ -70,9 +70,9 @@ namespace BackendApi.Controllers
     [HttpPut(Name = "Update")]
     [ProducesResponseType(typeof(void), StatusCodes.Status202Accepted)]
     [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateDevice([FromBody] DocumentDto deviceDto)
+    public async Task<IActionResult> UpdateDocument([FromBody] DocumentDto deviceDto)
     {
-      var result = await deviceManager.AddOrUpdateDeviceAsync(deviceDto);
+      var result = await documentManager.AddOrUpdateDocumentAsync(deviceDto);
       if (!result.Success)
       {
         return result.Exception switch
