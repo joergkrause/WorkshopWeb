@@ -8,17 +8,17 @@ namespace BusinessLogicLayer.Mappings
   {
     public MappingProfile()
     {
-      CreateMap<Device, DeviceDto>()
+      CreateMap<Document, DeviceDto>()
         .ForMember(e => e.HasValues, opt => opt.MapFrom(e => e.Values.Count > 0))
         .ReverseMap();
 
-      CreateMap<Device, DeviceListDto>();
-      CreateMap<Device, DeviceDetailsDto>();
+      CreateMap<Document, DeviceListDto>();
+      CreateMap<Document, DeviceDetailsDto>();
 
-      CreateMap<CreateDeviceDto, Device>();
-      CreateMap<UpdateDeviceDto, Device>();
+      CreateMap<CreateDeviceDto, Document>();
+      CreateMap<UpdateDeviceDto, Document>();
 
-      CreateMap<MeasureValue, MeasureValueDto>().ReverseMap();
+      CreateMap<Category, MeasureValueDto>().ReverseMap();
 
     }
   }
