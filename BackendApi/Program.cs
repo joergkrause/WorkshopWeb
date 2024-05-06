@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var cs = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<DevicesContext>(options =>
+builder.Services.AddDbContext<DocumentContext>(options =>
    options.UseSqlServer(cs));
 builder.Services.AddScoped<DeviceManager>();
 

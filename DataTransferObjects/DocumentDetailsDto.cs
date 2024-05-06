@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace DataTransferObjects
 {
-  public class UpdateDeviceDto
+  public class DocumentDetailsDto
   {
-
-    public int Id { get; set; }
-
     public string Name { get; set; } = default!;
 
-    public string? Description { get; set; }
+    public string Description { get; set; }
 
+    public string CategoryName { get; set; }
+
+    public int LatestContentId { get; set; }
   }
 }

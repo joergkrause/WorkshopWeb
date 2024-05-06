@@ -15,7 +15,7 @@ namespace BackendApi.Controllers
   {
 
     [HttpGet("{id:int}", Name = "GetById")]
-    [ProducesResponseType(typeof(DeviceDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(DocumentDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetDeviceById([FromRoute] int id)
     {
@@ -28,7 +28,7 @@ namespace BackendApi.Controllers
     }
 
     [HttpGet(Name = "GetAll")]
-    [ProducesResponseType(typeof(IEnumerable<DeviceListDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<DocumentListDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetDevices()
     {
       var devices = await deviceManager.GetDevicesAsync();
@@ -36,7 +36,7 @@ namespace BackendApi.Controllers
     }
 
     [HttpGet("name", Name = "Search")]
-    [ProducesResponseType(typeof(IEnumerable<DeviceListDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<DocumentListDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetDevicesByName([FromQuery] string name, [FromQuery] bool sort)
     {
       var devices = await deviceManager.GetDevicesByNameAsync(name, sort);
@@ -46,7 +46,7 @@ namespace BackendApi.Controllers
     [HttpPost(Name = "Add")]
     [ProducesResponseType(typeof(void), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> AddDevice([FromBody] DeviceDto deviceDto)
+    public async Task<IActionResult> AddDevice([FromBody] DocumentDto deviceDto)
     {
       //if (!ModelState.IsValid)
       //{
@@ -70,7 +70,7 @@ namespace BackendApi.Controllers
     [HttpPut(Name = "Update")]
     [ProducesResponseType(typeof(void), StatusCodes.Status202Accepted)]
     [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateDevice([FromBody] DeviceDto deviceDto)
+    public async Task<IActionResult> UpdateDevice([FromBody] DocumentDto deviceDto)
     {
       var result = await deviceManager.AddOrUpdateDeviceAsync(deviceDto);
       if (!result.Success)

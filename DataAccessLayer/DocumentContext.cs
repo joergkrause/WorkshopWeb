@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer;
 
-public class DevicesContext(DbContextOptions<DevicesContext> options) : DbContext(options)
+public class DocumentContext(DbContextOptions<DocumentContext> options) : DbContext(options)
 {
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -59,13 +59,13 @@ public class DevicesContext(DbContextOptions<DevicesContext> options) : DbContex
  
 }
 
-public class MigrationContext : IDesignTimeDbContextFactory<DevicesContext>
+public class MigrationContext : IDesignTimeDbContextFactory<DocumentContext>
 {
-  public DevicesContext CreateDbContext(string[] args)
+  public DocumentContext CreateDbContext(string[] args)
   {
-    var optionsBuilder = new DbContextOptionsBuilder<DevicesContext>();
+    var optionsBuilder = new DbContextOptionsBuilder<DocumentContext>();
     optionsBuilder.UseSqlServer("Server=(localdb)\\Workshop;Database=DocumentDb;Trusted_Connection=True;MultipleActiveResultSets=true");
 
-    return new DevicesContext(optionsBuilder.Options);
+    return new DocumentContext(optionsBuilder.Options);
   }
 }

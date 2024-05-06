@@ -6,7 +6,7 @@ namespace BusinessLogicLayer;
 
 public abstract class Manager(IServiceProvider serviceProvider)
 {
-  protected DevicesContext Context => serviceProvider.GetRequiredService<DevicesContext>();
+  protected DocumentContext Context => serviceProvider.GetRequiredService<DocumentContext>();
 
   protected IMapper Mapper => serviceProvider.GetRequiredService<IMapper>();
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataTransferObjects
 {
-  public class CreateDeviceDto
+  public class CreateDocumentDto
   {
     public string Name { get; set; } = default!;
 

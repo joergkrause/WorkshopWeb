@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataTransferObjects
 {
-  public class DeviceListDto
+  public class DocumentListDto
   {
     public int Id { get; set; }
 

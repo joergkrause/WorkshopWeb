@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
-    [DbContext(typeof(DevicesContext))]
+    [DbContext(typeof(DocumentContext))]
     [Migration("20240506113846_DocumentCatRelationColName")]
     partial class DocumentCatRelationColName
     {

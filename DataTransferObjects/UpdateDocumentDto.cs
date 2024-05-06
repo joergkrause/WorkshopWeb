@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace DataTransferObjects
 {
-  public class DeviceDetailsDto
+  public class UpdateDocumentDto
   {
+
+    public int Id { get; set; }
+
     public string Name { get; set; } = default!;
 
-    public ICollection<MeasureValueDto> Values { get; set; } = [];
+    public string? Description { get; set; }
+
   }
 }

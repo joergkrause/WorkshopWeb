@@ -18,7 +18,7 @@ namespace DataTransferObjects
   }
 
 
-  public class DeviceDto
+  public class DocumentDto
   {
     public int Id { get; set; }
 
@@ -30,7 +30,7 @@ namespace DataTransferObjects
     [StringLength(200)]
     public string? Description { get; set; }
 
-    [JsonPropertyName("hasval")]
-    public bool HasValues { get; set; }
+    [JsonPropertyName("hascontent")]
+    public bool HasContent { get; set; }
   }
 }

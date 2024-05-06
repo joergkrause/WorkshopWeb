@@ -8,19 +8,19 @@ public class DeviceManager(IServiceProvider serviceProvider) : Manager(servicePr
 {
 
   // TODO: Nullable
-  public async Task<DeviceDto?> GetDeviceById(int id)
+  public async Task<DocumentDto?> GetDeviceById(int id)
   {
     var model = await Context.Set<Document>().FindAsync(id);
-    return Mapper.Map<DeviceDto>(model);
+    return Mapper.Map<DocumentDto>(model);
   }
 
-  public async Task<IEnumerable<DeviceListDto>> GetDevicesAsync()
+  public async Task<IEnumerable<DocumentListDto>> GetDevicesAsync()
   {
     var models = await Context.Set<Document>().ToListAsync();
-    return Mapper.Map<IEnumerable<DeviceListDto>>(models);
+    return Mapper.Map<IEnumerable<DocumentListDto>>(models);
   }
 
-  public async Task<IEnumerable<DeviceListDto>> GetDevicesByNameAsync(string name, bool sort)
+  public async Task<IEnumerable<DocumentListDto>> GetDevicesByNameAsync(string name, bool sort)
   {
     var query = Context.Set<Document>()
       .Where(e => e.Name == name);
@@ -33,11 +33,11 @@ public class DeviceManager(IServiceProvider serviceProvider) : Manager(servicePr
       query = query.OrderByDescending(e => e.Name); 
     }
     var models = await query.AsNoTracking().ToListAsync();
-    return Mapper.Map<IEnumerable<DeviceListDto>>(models);
+    return Mapper.Map<IEnumerable<DocumentListDto>>(models);
   }
 
   // TODO: Use Dto for return type
-  public async Task<DataResult<Document>> AddOrUpdateDeviceAsync(DeviceDto deviceDto)
+  public async Task<DataResult<Document>> AddOrUpdateDeviceAsync(DocumentDto deviceDto)
   {
     var model = Mapper.Map<Document>(deviceDto);
     Context.Entry(model).State = model.Id == default ? EntityState.Added : EntityState.Modified;
