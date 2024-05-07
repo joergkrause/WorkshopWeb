@@ -1,4 +1,5 @@
-﻿using DataTransferObjects;
+﻿using BackendApi.DataTransferObjects;
+using DataTransferObjects;
 using DomainModels;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
@@ -58,9 +59,17 @@ public class DocumentManager(IServiceProvider serviceProvider) : Manager(service
     }
   }
 
-  public async Task DeleteDeviceAsync(Document device)
+  public async Task DeleteDeviceAsync(DocumentDto device)
   {
-    Context.Set<Document>().Remove(device);
+    Context.Set<Document>().Remove(new Document { Id = device.Id });
     await Context.SaveChangesAsync();
+  }
+
+  // jahr: 1945, titel: Test,  
+
+  public async Task<IEnumerable<int>> QueryDocuments(QueryObject query)
+  {
+    string name = query.Query.Name;
+    return Enumerable.Empty<int>();
   }
 }

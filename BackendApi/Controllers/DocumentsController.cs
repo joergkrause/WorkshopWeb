@@ -1,4 +1,5 @@
-﻿using BusinessLogicLayer;
+﻿using BackendApi.DataTransferObjects;
+using BusinessLogicLayer;
 using DataTransferObjects;
 using DomainModels;
 using Microsoft.AspNetCore.Http;
@@ -35,11 +36,20 @@ namespace BackendApi.Controllers
       return Ok(devices);
     }
 
+    // api/documents/name?name=abc&sort=true
     [HttpGet("name", Name = "Search")]
     [ProducesResponseType(typeof(IEnumerable<DocumentListDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetDocumentsByName([FromQuery] string name, [FromQuery] bool sort)
     {
       var devices = await documentManager.GetDocumentsByNameAsync(name, sort);
+      return Ok(devices);
+    }
+
+    [HttpPost("query", Name = "Query")]
+    [ProducesResponseType(typeof(IEnumerable<DocumentListDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> QueryDocuments([FromBody] QueryObject query)
+    {
+      var devices = await documentManager.QueryDocuments(query);
       return Ok(devices);
     }
 
