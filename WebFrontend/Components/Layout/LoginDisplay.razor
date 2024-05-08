@@ -1,0 +1,26 @@
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+
+@inject AuthenticationStateProvider AuthProvider
+
+<AuthorizeView>
+  <Authorized>
+      @User.FindFirst("name")?.Value
+      <a href="MicrosoftIdentity/Account/SignOut">Abmelden</a>                
+  </Authorized>
+  <NotAuthorized>
+    <a href="MicrosoftIdentity/Account/SignIn">Anmeldung</a>
+  </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+  private ClaimsPrincipal User { get; set; }
+
+  protected override async Task OnInitializedAsync()
+  {
+    var auth = await AuthProvider.GetAuthenticationStateAsync();
+    User = auth.User;
+  }
+
+}

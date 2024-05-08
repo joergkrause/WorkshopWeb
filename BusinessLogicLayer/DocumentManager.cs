@@ -46,6 +46,12 @@ public class DocumentManager(IServiceProvider serviceProvider) : Manager(service
   /// <returns></returns>
   public async Task<DataResult<DocumentDto>> AddDocumentAsync(CreateDocumentDto deviceDto)
   {
+    var canWrite = UserContext.Principal.HasClaim("scope", "write:documents");
+    if (!canWrite)
+    {
+      return new DataResult<DocumentDto>(null!, false, new UnauthorizedAccessException());
+    }
+
     var model = Mapper.Map<Document>(deviceDto);
     var category = await Context.Set<Category>().FindAsync(deviceDto.CategoryId);
 

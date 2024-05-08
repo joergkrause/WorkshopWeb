@@ -2,12 +2,14 @@
 using BusinessLogicLayer;
 using DataTransferObjects;
 using DomainModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendApi.Controllers
 {
+  [Authorize]
   [Route("api/[controller]")]
   [ApiController]
   [Produces("application/json")]
@@ -28,6 +30,7 @@ namespace BackendApi.Controllers
       return Ok(device);
     }
 
+    [Authorize("read:documents")]
     [HttpGet(Name = "GetAll")]
     [ProducesResponseType(typeof(IEnumerable<DocumentListDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetDocuments()

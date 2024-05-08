@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer;
 
-public class DocumentContext(DbContextOptions<DocumentContext> options) : DbContext(options)
+public class DocumentContext(DbContextOptions<DocumentContext> options, IUserContext userContext) : DbContext(options)
 {
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -28,6 +28,25 @@ public class DocumentContext(DbContextOptions<DocumentContext> options) : DbCont
     throw new InvalidOperationException("no, async only");
   }
 
+  public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+  {
+    var entries = ChangeTracker.Entries<IEntityBase>();
+    foreach (var entry in entries)
+    {
+      switch (entry.State)
+      {
+        case EntityState.Added:
+          entry.Property<string>("Created").CurrentValue = userContext.Principal.Identity.Name; 
+          entry.Property<string>("Modified").CurrentValue = userContext.Principal.Identity.Name;
+          break;
+        case EntityState.Modified:
+          entry.Property<string>("Modified").CurrentValue = userContext.Principal.Identity.Name;
+          break;
+      }
+    }
+    return base.SaveChangesAsync(cancellationToken);
+  }
+
   private Expression<Func<TEntity,bool>> SoftDeleteFilter<TEntity>() where TEntity : IEntityBase
   {
     return e => EF.Property<bool>(e, nameof(ISoftDeleteProperties.IsDeleted)) == false;
@@ -41,6 +60,8 @@ public class DocumentContext(DbContextOptions<DocumentContext> options) : DbCont
     modelBuilder.Entity<Document>().Property(e => e.Description).HasMaxLength(200);
     modelBuilder.Entity<Document>().Property<bool>(nameof(ISoftDeleteProperties.IsDeleted));
     modelBuilder.Entity<Document>().HasQueryFilter(SoftDeleteFilter<Document>());
+    modelBuilder.Entity<Document>().Property<string>("Created");  
+    modelBuilder.Entity<Document>().Property<string>("Modified");
     modelBuilder.Entity<Document>()
       .HasOne(e => e.Category)
       .WithMany(e => e.Documents)

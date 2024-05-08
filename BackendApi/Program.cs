@@ -1,9 +1,34 @@
 using BusinessLogicLayer;
 using BusinessLogicLayer.Mappings;
 using DataAccessLayer;
+using DomainModels;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IUserContext, UserContext>();
+
+builder.Services
+  .AddAuthentication("bearer")
+  .AddJwtBearer(options =>
+{
+  // options.TokenValidationParameters.
+  options.Events.OnTokenValidated = async context =>
+  {
+    var userContext = context.HttpContext.RequestServices.GetRequiredService<IUserContext>();    
+    userContext.Principal = context.Principal;
+  };
+});
+
+builder.Services.AddAuthorization(configure =>
+{
+  configure.AddPolicy("read:documents", policy =>
+  {
+    policy.RequireClaim("scope", "read:documents");
+    policy.RequireRole("admin");
+    policy.Build();
+  });
+});
 
 
 // Add services to the container.
