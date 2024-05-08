@@ -3,7 +3,7 @@
 
 @inject AuthenticationStateProvider AuthProvider
 
-<AuthorizeView>
+<AuthorizeView Roles="admin">
   <Authorized>
       @User.FindFirst("name")?.Value
       <a href="MicrosoftIdentity/Account/SignOut">Abmelden</a>                
