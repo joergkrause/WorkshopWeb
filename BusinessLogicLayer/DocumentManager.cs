@@ -38,11 +38,41 @@ public class DocumentManager(IServiceProvider serviceProvider) : Manager(service
     return Mapper.Map<IEnumerable<DocumentListDto>>(models);
   }
 
-  // TODO: Use Dto for return type
-  public async Task<DataResult<DocumentDto>> AddOrUpdateDocumentAsync(DocumentDto deviceDto)
+  /// <summary>
+  /// 
+  /// </summary>
+  /// <param name="deviceDto"></param>
+  /// <exception cref="ArgumentNullException" />
+  /// <returns></returns>
+  public async Task<DataResult<DocumentDto>> AddDocumentAsync(CreateDocumentDto deviceDto)
   {
     var model = Mapper.Map<Document>(deviceDto);
-    Context.Entry(model).State = model.Id == default ? EntityState.Added : EntityState.Modified;
+    var category = await Context.Set<Category>().FindAsync(deviceDto.CategoryId);
+
+    ArgumentNullException.ThrowIfNull(category, nameof(category));
+
+    model.Category = category;
+    Context.Entry(model).State = EntityState.Added;
+    try
+    {
+      await Context.SaveChangesAsync();
+      var result = Mapper.Map<DocumentDto>(model);
+      return new DataResult<DocumentDto>(result, true, null);
+    }
+    catch (DbUpdateConcurrencyException ex) // when (ex.Data.)
+    {
+      return new DataResult<DocumentDto>(null!, false, ex);
+    }
+    catch (DbUpdateException ex)
+    {
+      return new DataResult<DocumentDto>(null!, false, ex);
+    }
+  }
+
+  public async Task<DataResult<DocumentDto>> UpdateDocumentAsync(UpdateDocumentDto deviceDto)
+  {
+    var model = Mapper.Map<Document>(deviceDto);
+    Context.Entry(model).State = EntityState.Modified;
     try
     {
       await Context.SaveChangesAsync();
@@ -69,7 +99,7 @@ public class DocumentManager(IServiceProvider serviceProvider) : Manager(service
 
   public async Task<IEnumerable<int>> QueryDocuments(QueryObject query)
   {
-    string name = query.Query.Name;
+    var name = query.Query;
     return Enumerable.Empty<int>();
   }
 }

@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option csharp_namespace = "BackendForFrontend";
+
+package document;
+
+// The greeting service definition.
+service Documents {
+  // Sends a greeting
+  rpc GetDocuments (DocumentsRequest) returns (DocumentsReply);
+  rpc GetDocumentById(DocumentByIdRequest) returns (DocumentReply);
+  rpc CreateDocument(CreateDocumentsRequest) returns (EmptyDocumentsReply);
+  rpc UpdateDocument(UpdateDocumentsRequest) returns (EmptyDocumentsReply);
+  rpc DeleteDocument(DeleteDocumentsRequest) returns (EmptyDocumentsReply);
+}
+
+// The request message containing the user's name.
+message DocumentsRequest {
+}
+
+message CreateDocumentsRequest {
+    string name = 1;
+    string description = 2;
+}
+
+message UpdateDocumentsRequest {
+    int32 id = 1;
+    string name = 2;
+    string description = 3;
+}
+
+message DeleteDocumentsRequest {
+    int32 id = 1;
+}
+
+// The response message containing the greetings.
+message DocumentReply {
+  int32 id = 1;
+  string name = 2;
+}
+
+message DocumentsReply {
+  repeated DocumentReply documents = 1;
+}
+
+message DocumentByIdRequest {
+    int32 id = 1;
+}
+
+message EmptyDocumentsReply {
+}

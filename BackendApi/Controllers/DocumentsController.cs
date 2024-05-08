@@ -56,14 +56,14 @@ namespace BackendApi.Controllers
     [HttpPost(Name = "Add")]
     [ProducesResponseType(typeof(void), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> AddDocument([FromBody] DocumentDto deviceDto)
+    public async Task<IActionResult> AddDocument([FromBody] CreateDocumentDto deviceDto)
     {
       //if (!ModelState.IsValid)
       //{
         
       //}
 
-      var result = await documentManager.AddOrUpdateDocumentAsync(deviceDto);
+      var result = await documentManager.AddDocumentAsync(deviceDto);
       if (!result.Success)
       {
         return result.Exception switch
@@ -80,9 +80,9 @@ namespace BackendApi.Controllers
     [HttpPut(Name = "Update")]
     [ProducesResponseType(typeof(void), StatusCodes.Status202Accepted)]
     [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateDocument([FromBody] DocumentDto deviceDto)
+    public async Task<IActionResult> UpdateDocument([FromBody] UpdateDocumentDto deviceDto)
     {
-      var result = await documentManager.AddOrUpdateDocumentAsync(deviceDto);
+      var result = await documentManager.UpdateDocumentAsync(deviceDto);
       if (!result.Success)
       {
         return result.Exception switch

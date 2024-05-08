@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<DevicesClient>(sp =>
 {
   var httpClient = new HttpClient();
-  var client = new DevicesClient("https://localhost:7242", httpClient);
+  var client = new DocumentClient("https://localhost:7242", httpClient);
   return client;
 });  
 // Add services to the container.

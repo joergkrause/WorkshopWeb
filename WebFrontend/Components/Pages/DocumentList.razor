@@ -1,0 +1,39 @@
+@using BackendForFrontend
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Aktion</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var document in Documents)
+    {
+      <tr>
+        <td>@document.Id</td>
+        <td>@document.Name</td>
+        <td>
+          <button type="button" @onclick="() => EditDocument(document)">Edit</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+@code {
+
+  [Parameter]
+  public List<DocumentReply> Documents { get; set; } = [];
+
+  [Parameter]
+  public EventCallback<DocumentReply> OnEditDocument { get; set; }
+
+  private void EditDocument(DocumentReply document)
+  {
+    if (OnEditDocument.HasDelegate)
+    {
+      OnEditDocument.InvokeAsync(document);
+    }
+  }
+}
