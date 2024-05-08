@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -80,6 +81,14 @@ public class DocumentContext(DbContextOptions<DocumentContext> options, IUserCon
  
 }
 
+public class FakeUserContext : IUserContext
+{
+  public ClaimsPrincipal Principal { 
+    get => new ClaimsPrincipal(new ClaimsIdentity("MigrateUser")); 
+    set => throw new InvalidOperationException("nope");
+  }
+}
+
 public class MigrationContext : IDesignTimeDbContextFactory<DocumentContext>
 {
   public DocumentContext CreateDbContext(string[] args)
@@ -87,6 +96,6 @@ public class MigrationContext : IDesignTimeDbContextFactory<DocumentContext>
     var optionsBuilder = new DbContextOptionsBuilder<DocumentContext>();
     optionsBuilder.UseSqlServer("Server=(localdb)\\Workshop;Database=DocumentDb;Trusted_Connection=True;MultipleActiveResultSets=true");
 
-    return new DocumentContext(optionsBuilder.Options);
+    return new DocumentContext(optionsBuilder.Options, new FakeUserContext());
   }
 }
